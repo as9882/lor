@@ -1,0 +1,1338 @@
+/* =====================================
+   CONFIGURACIÓN GENERAL
+===================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --negro: #030305;
+    --azul: #10131c;
+    --azul-claro: #1c2330;
+    --blanco: #eee9dc;
+    --gris: #bdb9ad;
+    --rojo: #8d2c24;
+    --rojo-brillante: #c74835;
+}
+
+body {
+    background: #000;
+    color: var(--blanco);
+    font-family: "Courier New", monospace;
+    overflow: hidden;
+}
+
+
+/* =====================================
+   RUIDO / EFECTO VHS
+===================================== */
+
+.noise {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.08;
+
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(255,255,255,0.08) 3px
+        );
+
+    animation: ruido 0.15s infinite;
+}
+
+@keyframes ruido {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(2px);
+    }
+
+    100% {
+        transform: translateY(-2px);
+    }
+
+}
+
+
+/* =====================================
+   PANTALLAS
+===================================== */
+
+.pantalla {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #1a1d28 0%,
+            #0b0c11 45%,
+            #020203 100%
+        );
+
+    overflow-y: auto;
+
+}
+
+.pantalla.activa {
+    display: flex;
+}
+
+
+/* =====================================
+   PISO AJEDREZ
+===================================== */
+
+.escenario::after,
+.escenario-personaje::after,
+.personajes::after {
+
+    content: "";
+
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 17%;
+
+    background:
+
+        linear-gradient(
+            45deg,
+            #08090c 25%,
+            #242731 25%,
+            #242731 50%,
+            #08090c 50%,
+            #08090c 75%,
+            #242731 75%
+        );
+
+    background-size: 80px 80px;
+
+    opacity: 0.9;
+
+    z-index: 0;
+
+}
+
+
+/* =====================================
+   INICIO
+===================================== */
+
+.escenario {
+
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+
+        linear-gradient(
+            rgba(0,0,0,0.4),
+            rgba(0,0,0,0.75)
+        ),
+
+        radial-gradient(
+            ellipse at center,
+            #1c202c,
+            #050609 70%
+        );
+
+}
+
+.texto-inicio {
+
+    position: relative;
+
+    z-index: 3;
+
+    text-align: center;
+
+    animation: aparecer 1.5s ease;
+
+}
+
+.texto-inicio h1 {
+
+    font-size: clamp(35px, 7vw, 80px);
+
+    letter-spacing: 4px;
+
+    text-shadow:
+        3px 3px 0 #5d594f;
+
+}
+
+.texto-inicio p {
+
+    margin: 20px 0;
+
+    font-size: clamp(15px, 3vw, 25px);
+
+    letter-spacing: 3px;
+
+}
+
+button {
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+}
+
+.texto-inicio button {
+
+    padding: 12px 50px;
+
+    background: transparent;
+
+    border: 2px solid var(--blanco);
+
+    border-radius: 30px;
+
+    color: var(--blanco);
+
+    font-size: 20px;
+
+    transition: 0.3s;
+
+}
+
+.texto-inicio button:hover {
+
+    background: var(--blanco);
+
+    color: #050505;
+
+    box-shadow:
+        0 0 20px rgba(255,255,255,0.3);
+
+}
+
+
+/* =====================================
+   CUENTA REGRESIVA
+===================================== */
+
+.contador {
+
+    font-size: clamp(80px, 18vw, 200px);
+
+    font-weight: bold;
+
+    text-shadow:
+        0 0 10px #fff,
+        0 0 30px #aaa;
+
+    animation: contadorAnim 1s infinite;
+
+}
+
+@keyframes contadorAnim {
+
+    0% {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+
+}
+
+
+/* =====================================
+   PERSONAJE GRANDE
+===================================== */
+
+.escenario-personaje {
+
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+}
+
+.freddy-grande {
+
+    height: 70%;
+
+    max-width: 50%;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(0 0 15px rgba(0,0,0,0.8));
+
+    animation:
+        aparicionPersonaje 1.2s ease;
+
+    z-index: 2;
+
+}
+
+.mensaje-lateral {
+
+    position: absolute;
+
+    left: 7%;
+
+    top: 42%;
+
+    z-index: 4;
+
+    display: flex;
+
+    flex-direction: column;
+
+    font-size: 25px;
+
+}
+
+.mensaje-lateral strong {
+
+    background: rgba(230,230,225,0.9);
+
+    color: #1b1b1b;
+
+    padding: 15px 40px;
+
+    border-radius: 30px;
+
+}
+
+
+/* =====================================
+   FLECHAS
+===================================== */
+
+.flecha {
+
+    position: absolute;
+
+    right: 30px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    z-index: 20;
+
+    width: 55px;
+    height: 55px;
+
+    border-radius: 50%;
+
+    border: none;
+
+    background: rgba(220,220,215,0.8);
+
+    color: #111;
+
+    font-size: 30px;
+
+    transition: 0.3s;
+
+}
+
+.flecha:hover {
+
+    transform:
+        translateY(-50%)
+        scale(1.15);
+
+}
+
+
+/* =====================================
+   TÍTULOS
+===================================== */
+
+.titulo-seccion {
+
+    position: absolute;
+
+    top: 7%;
+
+    width: 100%;
+
+    text-align: center;
+
+    z-index: 10;
+
+}
+
+.titulo-seccion h1 {
+
+    font-size: clamp(30px, 6vw, 70px);
+
+    letter-spacing: 3px;
+
+    text-shadow:
+        3px 3px 0 #58554e;
+
+}
+
+.titulo-seccion p {
+
+    margin-top: 10px;
+
+    font-size: 18px;
+
+    letter-spacing: 3px;
+
+}
+
+
+/* =====================================
+   PERSONAJES
+===================================== */
+
+.personajes {
+
+    position: relative;
+
+    width: 90%;
+
+    max-width: 1100px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-end;
+
+    gap: clamp(10px, 4vw, 60px);
+
+    z-index: 5;
+
+    padding-top: 120px;
+
+}
+
+.personaje {
+
+    position: relative;
+
+    width: 180px;
+
+    min-height: 270px;
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    transition: 0.35s;
+
+}
+
+.personaje img {
+
+    width: 100%;
+
+    height: 230px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(0 8px 10px rgba(0,0,0,0.8));
+
+    transition: 0.35s;
+
+}
+
+.personaje span {
+
+    display: block;
+
+    margin-top: 8px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+}
+
+.personaje:hover {
+
+    transform:
+        translateY(-15px)
+        scale(1.08);
+
+}
+
+.personaje:hover img {
+
+    filter:
+        drop-shadow(0 0 20px rgba(255,255,255,0.3));
+
+}
+
+
+/* FOXY */
+
+.personaje.foxy {
+
+    transform: scale(1.08);
+
+}
+
+.personaje.foxy:hover {
+
+    transform:
+        translateY(-18px)
+        scale(1.15);
+
+}
+
+.corazon-foxy {
+
+    position: absolute;
+
+    top: -15px;
+    right: 15px;
+
+    color: #b7342c;
+
+    font-size: 25px;
+
+    animation:
+        latido 1.2s infinite;
+
+}
+
+
+/* =====================================
+   BOTÓN CONTINUAR
+===================================== */
+
+.boton-siguiente {
+
+    position: absolute;
+
+    bottom: 25px;
+
+    right: 35px;
+
+    z-index: 20;
+
+    padding: 12px 25px;
+
+    border: 1px solid #aaa;
+
+    border-radius: 25px;
+
+    background: rgba(20,20,25,0.85);
+
+    color: white;
+
+    font-family: inherit;
+
+    transition: 0.3s;
+
+}
+
+.boton-siguiente:hover {
+
+    background: white;
+
+    color: black;
+
+}
+
+
+/* =====================================
+   MENSAJE PERSONAJE
+===================================== */
+
+.personaje-mensaje {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 80px;
+
+    width: 90%;
+
+    max-width: 1000px;
+
+}
+
+.personaje-mensaje img {
+
+    width: 350px;
+
+    max-height: 65vh;
+
+    object-fit: contain;
+
+}
+
+.mensaje-caja {
+
+    max-width: 450px;
+
+    padding: 30px;
+
+    background:
+        rgba(220,220,215,0.92);
+
+    color: #161616;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 0 30px rgba(0,0,0,0.5);
+
+}
+
+.mensaje-caja h2 {
+
+    font-size: 35px;
+
+    margin-bottom: 20px;
+
+}
+
+.mensaje-caja p {
+
+    font-family: Arial, sans-serif;
+
+    line-height: 1.7;
+
+}
+
+
+/* =====================================
+   PLAYLIST
+===================================== */
+
+.playlist-contenedor {
+
+    width: 90%;
+
+    max-width: 1000px;
+
+    margin-top: 100px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 20px;
+
+}
+
+.reproductor {
+
+    background:
+        rgba(30,31,38,0.9);
+
+    padding: 20px;
+
+    display: flex;
+
+    gap: 20px;
+
+    border: 1px solid #393b44;
+
+}
+
+.portada {
+
+    width: 150px;
+    height: 150px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #17191f,
+            #4a3f36
+        );
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 60px;
+
+}
+
+.info-cancion h2 {
+
+    margin-bottom: 5px;
+
+}
+
+.info-cancion p {
+
+    color: #aaa;
+
+    margin-bottom: 25px;
+
+}
+
+audio {
+
+    width: 100%;
+
+    max-width: 300px;
+
+}
+
+.lista-canciones {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+}
+
+.lista-canciones button {
+
+    padding: 16px;
+
+    border: 1px solid #333;
+
+    background:
+        rgba(20,20,25,0.9);
+
+    color: white;
+
+    text-align: left;
+
+    transition: 0.3s;
+
+}
+
+.lista-canciones button:hover {
+
+    background: #30323a;
+
+}
+
+.lista-canciones span {
+
+    color: #888;
+
+    margin-right: 20px;
+
+}
+
+.texto-playlist {
+
+    grid-column: 1 / 3;
+
+    padding: 20px;
+
+    background:
+        rgba(220,220,215,0.9);
+
+    color: #111;
+
+    line-height: 1.6;
+
+}
+
+
+/* =====================================
+   GALERÍA
+===================================== */
+
+.galeria {
+
+    width: 90%;
+
+    max-width: 1000px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+    margin-top: 120px;
+
+}
+
+.foto {
+
+    height: 180px;
+
+    background: #15161b;
+
+    border: 5px solid #222;
+
+    overflow: hidden;
+
+    transform:
+        rotate(var(--rotacion));
+
+    transition: 0.35s;
+
+}
+
+.foto:nth-child(1) {
+    --rotacion: -2deg;
+}
+
+.foto:nth-child(2) {
+    --rotacion: 2deg;
+}
+
+.foto:nth-child(3) {
+    --rotacion: -1deg;
+}
+
+.foto:nth-child(4) {
+    --rotacion: 2deg;
+}
+
+.foto:nth-child(5) {
+    --rotacion: -2deg;
+}
+
+.foto:nth-child(6) {
+    --rotacion: 1deg;
+}
+
+.foto:hover {
+
+    transform:
+        scale(1.08)
+        rotate(0deg);
+
+    z-index: 5;
+
+}
+
+.foto img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+}
+
+
+/* =====================================
+   DEDICACIÓN
+===================================== */
+
+.dedicacion {
+
+    width: 90%;
+
+    max-width: 1000px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 70px;
+
+}
+
+.foxy-dedicacion {
+
+    width: 330px;
+
+    max-height: 60vh;
+
+    object-fit: contain;
+
+    animation:
+        flotar 3s ease-in-out infinite;
+
+}
+
+.dedicacion-caja {
+
+    max-width: 500px;
+
+    padding: 35px;
+
+    background:
+        rgba(225,225,220,0.93);
+
+    color: #171717;
+
+    border-radius: 8px;
+
+    line-height: 1.7;
+
+}
+
+.dedicacion-caja h1 {
+
+    font-size: 40px;
+
+    margin-bottom: 20px;
+
+}
+
+.dedicacion-caja p {
+
+    margin-bottom: 15px;
+
+    font-family: Arial, sans-serif;
+
+}
+
+.dedicacion-caja button {
+
+    padding: 12px 20px;
+
+    background: #171717;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 20px;
+
+}
+
+
+/* =====================================
+   CARTA FINAL
+===================================== */
+
+#carta {
+
+    background:
+
+        radial-gradient(
+            circle at center,
+            #20232c 0%,
+            #08090d 70%
+        );
+
+}
+
+.carta {
+
+    position: relative;
+
+    width: 90%;
+
+    max-width: 750px;
+
+    max-height: 88vh;
+
+    overflow-y: auto;
+
+    padding: 50px;
+
+    background:
+        rgba(230,228,216,0.96);
+
+    color: #181818;
+
+    box-shadow:
+        0 0 60px rgba(0,0,0,0.8);
+
+    animation:
+        cartaAparece 1.5s ease;
+
+}
+
+.carta-decoracion {
+
+    position: absolute;
+
+    top: 20px;
+    right: 30px;
+
+    font-size: 30px;
+
+    color: #8d2c24;
+
+    animation:
+        latido 1.2s infinite;
+
+}
+
+.carta h1 {
+
+    text-align: center;
+
+    font-size: clamp(25px, 5vw, 45px);
+
+}
+
+.linea {
+
+    width: 80%;
+
+    height: 2px;
+
+    margin: 20px auto 30px;
+
+    background: #555;
+
+}
+
+.carta p {
+
+    font-family: Georgia, serif;
+
+    font-size: 18px;
+
+    line-height: 1.8;
+
+    margin-bottom: 20px;
+
+}
+
+.carta h2 {
+
+    text-align: center;
+
+    margin: 30px 0;
+
+    color: #8d2c24;
+
+}
+
+.frase-final {
+
+    text-align: center;
+
+}
+
+.firma {
+
+    margin-top: 40px;
+
+    text-align: right;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    font-family: Georgia, serif;
+
+}
+
+.firma strong {
+
+    font-size: 25px;
+
+}
+
+
+/* =====================================
+   ANIMACIONES
+===================================== */
+
+@keyframes aparecer {
+
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+@keyframes aparicionPersonaje {
+
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes flotar {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+
+}
+
+@keyframes latido {
+
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.25);
+    }
+
+}
+
+@keyframes cartaAparece {
+
+    from {
+        opacity: 0;
+        transform:
+            scale(0.85)
+            translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            scale(1)
+            translateY(0);
+    }
+
+}
+
+
+/* =====================================
+   CELULAR
+===================================== */
+
+@media (max-width: 700px) {
+
+    body {
+        overflow: hidden;
+    }
+
+    .titulo-seccion {
+        top: 4%;
+    }
+
+    .titulo-seccion h1 {
+        font-size: 30px;
+    }
+
+    .personajes {
+
+        width: 95%;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 5px;
+
+        padding-top: 80px;
+
+    }
+
+    .personaje {
+
+        width: 140px;
+
+        min-height: 190px;
+
+        margin: auto;
+
+    }
+
+    .personaje img {
+
+        height: 160px;
+
+    }
+
+    .playlist-contenedor {
+
+        grid-template-columns: 1fr;
+
+        margin-top: 90px;
+
+        max-height: 75vh;
+
+        overflow-y: auto;
+
+    }
+
+    .texto-playlist {
+
+        grid-column: 1;
+
+    }
+
+    .reproductor {
+
+        flex-direction: column;
+
+    }
+
+    .portada {
+
+        width: 120px;
+        height: 120px;
+
+    }
+
+    .galeria {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        margin-top: 100px;
+
+        max-height: 65vh;
+
+        overflow-y: auto;
+
+    }
+
+    .foto {
+
+        height: 130px;
+
+    }
+
+    .personaje-mensaje {
+
+        flex-direction: column-reverse;
+
+        gap: 20px;
+
+        margin-top: 40px;
+
+    }
+
+    .personaje-mensaje img {
+
+        width: 220px;
+
+        max-height: 35vh;
+
+    }
+
+    .mensaje-caja {
+
+        max-width: 90%;
+
+        padding: 20px;
+
+    }
+
+    .dedicacion {
+
+        flex-direction: column;
+
+        gap: 10px;
+
+        margin-top: 30px;
+
+    }
+
+    .foxy-dedicacion {
+
+        width: 180px;
+
+        max-height: 35vh;
+
+    }
+
+    .dedicacion-caja {
+
+        max-width: 90%;
+
+        padding: 20px;
+
+    }
+
+    .carta {
+
+        width: 92%;
+
+        padding: 30px 22px;
+
+        max-height: 88vh;
+
+    }
+
+    .carta p {
+
+        font-size: 16px;
+
+    }
+
+    .mensaje-lateral {
+
+        left: 5%;
+
+        top: 35%;
+
+        font-size: 15px;
+
+    }
+
+    .mensaje-lateral strong {
+
+        padding: 10px 15px;
+
+    }
+
+}

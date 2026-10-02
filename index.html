@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Para mi Mon Amour</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- EFECTO DE OSCURIDAD -->
+    <div class="noise"></div>
+
+    <!-- =========================
+         PANTALLA INICIAL
+    ========================== -->
+
+    <section id="inicio" class="pantalla activa">
+
+        <div class="escenario">
+
+            <div class="texto-inicio">
+                <h1>HOLA MI AMOR</h1>
+
+                <p>¿QUIERES VER TU SORPRESA?</p>
+
+                <button onclick="comenzar()">
+                    SÍ
+                </button>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CUENTA REGRESIVA
+    ========================== -->
+
+    <section id="cuenta" class="pantalla">
+
+        <div class="contador" id="contador">
+            3
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MENSAJE INICIAL
+    ========================== -->
+
+    <section id="mensajeInicial" class="pantalla">
+
+        <div class="escenario-personaje">
+
+            <div class="mensaje-lateral">
+                <span>TO</span>
+                <strong>TE AMO MUCHO</strong>
+            </div>
+
+            <img
+                src="img/freddy.png"
+                class="freddy-grande"
+                alt="Freddy"
+            >
+
+        </div>
+
+        <button class="flecha" onclick="mostrarSeleccion()">
+            →
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         SELECCIÓN DE PERSONAJES
+    ========================== -->
+
+    <section id="seleccion" class="pantalla">
+
+        <div class="titulo-seccion">
+
+            <h1>SORPRESA MI AMOR!!</h1>
+
+            <p>ELIGE CADA UNO</p>
+
+        </div>
+
+
+        <div class="personajes">
+
+            <!-- BONNIE -->
+
+            <button
+                class="personaje"
+                onclick="mostrarMensaje('bonnie')"
+            >
+
+                <img src="img/bonnie.png" alt="Bonnie">
+
+                <span>BONNIE</span>
+
+            </button>
+
+
+            <!-- FOXY -->
+
+            <button
+                class="personaje foxy"
+                onclick="mostrarMensaje('foxy')"
+            >
+
+                <div class="corazon-foxy">♥</div>
+
+                <img src="img/foxy.png" alt="Foxy">
+
+                <span>FOXY</span>
+
+            </button>
+
+
+            <!-- FREDDY -->
+
+            <button
+                class="personaje"
+                onclick="mostrarMensaje('freddy')"
+            >
+
+                <img src="img/freddy.png" alt="Freddy">
+
+                <span>FREDDY</span>
+
+            </button>
+
+
+            <!-- CHICA -->
+
+            <button
+                class="personaje"
+                onclick="mostrarMensaje('chica')"
+            >
+
+                <img src="img/chica.png" alt="Chica">
+
+                <span>CHICA</span>
+
+            </button>
+
+        </div>
+
+        <button
+            class="boton-siguiente"
+            onclick="mostrarPlaylist()"
+        >
+            CONTINUAR →
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         MENSAJES DE PERSONAJES
+    ========================== -->
+
+    <section id="mensajePersonaje" class="pantalla">
+
+        <div class="personaje-mensaje">
+
+            <div class="mensaje-caja">
+
+                <h2 id="tituloPersonaje">
+                    FOXY
+                </h2>
+
+                <p id="textoPersonaje">
+                    ...
+                </p>
+
+            </div>
+
+            <img
+                id="imagenPersonaje"
+                src=""
+                alt="Personaje"
+            >
+
+        </div>
+
+        <button
+            class="flecha"
+            onclick="volverSeleccion()"
+        >
+            ←
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         PLAYLIST
+    ========================== -->
+
+    <section id="playlist" class="pantalla">
+
+        <div class="titulo-seccion">
+
+            <h1>NUESTRA PLAYLIST</h1>
+
+        </div>
+
+
+        <div class="playlist-contenedor">
+
+            <!-- REPRODUCTOR -->
+
+            <div class="reproductor">
+
+                <div class="portada">
+
+                    <span>♥</span>
+
+                </div>
+
+                <div class="info-cancion">
+
+                    <h2 id="nombreCancion">
+                        Eres Ese Algo
+                    </h2>
+
+                    <p id="artistaCancion">
+                        Nuestra canción
+                    </p>
+
+                    <audio
+                        id="audio"
+                        controls
+                    >
+                    </audio>
+
+                </div>
+
+            </div>
+
+
+            <!-- CANCIONES -->
+
+            <div class="lista-canciones">
+
+                <button onclick="reproducirCancion(0)">
+                    <span>01</span>
+                    Eres Ese Algo
+                </button>
+
+                <button onclick="reproducirCancion(1)">
+                    <span>02</span>
+                    Hasta la Muerte
+                </button>
+
+                <button onclick="reproducirCancion(2)">
+                    <span>03</span>
+                    POV
+                </button>
+
+            </div>
+
+
+            <!-- DEDICATORIA -->
+
+            <div class="texto-playlist">
+
+                <h3>PARA TI, MON AMOUR</h3>
+
+                <p>
+                    Te dedico esta playlist porque hay canciones
+                    que me hacen pensar en ti y en todo lo que
+                    siento cuando estoy contigo.
+                </p>
+
+                <p>
+                    Cada canción tiene un pequeño pedacito
+                    de lo que siento por ti.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="boton-siguiente"
+            onclick="mostrarFotos()"
+        >
+            CONTINUAR →
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         FOTOS
+    ========================== -->
+
+    <section id="fotos" class="pantalla">
+
+        <div class="titulo-seccion">
+
+            <h1>NUESTRAS FOTOS</h1>
+
+            <p>ALGUNOS DE NUESTROS RECUERDOS</p>
+
+        </div>
+
+
+        <div class="galeria">
+
+            <!--
+                SOLO CAMBIA LOS ARCHIVOS
+                foto1.jpg, foto2.jpg...
+            -->
+
+            <div class="foto">
+                <img src="img/foto1.jpg" alt="Foto 1">
+            </div>
+
+            <div class="foto">
+                <img src="img/foto2.jpg" alt="Foto 2">
+            </div>
+
+            <div class="foto">
+                <img src="img/foto3.jpg" alt="Foto 3">
+            </div>
+
+            <div class="foto">
+                <img src="img/foto4.jpg" alt="Foto 4">
+            </div>
+
+            <div class="foto">
+                <img src="img/foto5.jpg" alt="Foto 5">
+            </div>
+
+            <div class="foto">
+                <img src="img/foto6.jpg" alt="Foto 6">
+            </div>
+
+        </div>
+
+
+        <button
+            class="boton-siguiente"
+            onclick="mostrarSeleccionFinal()"
+        >
+            CONTINUAR →
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         SEGUNDA SELECCIÓN
+    ========================== -->
+
+    <section id="seleccionFinal" class="pantalla">
+
+        <div class="titulo-seccion">
+
+            <h1>SORPRESA MI AMOR!!</h1>
+
+            <p>ELIGE UNO</p>
+
+        </div>
+
+
+        <div class="personajes personajes-final">
+
+            <button
+                class="personaje"
+                onclick="mostrarDedicacion()"
+            >
+
+                <img src="img/bonnie.png" alt="Bonnie">
+
+            </button>
+
+
+            <button
+                class="personaje foxy"
+                onclick="mostrarDedicacion()"
+            >
+
+                <img src="img/foxy.png" alt="Foxy">
+
+            </button>
+
+
+            <button
+                class="personaje"
+                onclick="mostrarDedicacion()"
+            >
+
+                <img src="img/freddy.png" alt="Freddy">
+
+            </button>
+
+
+            <button
+                class="personaje"
+                onclick="mostrarDedicacion()"
+            >
+
+                <img src="img/chica.png" alt="Chica">
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         DEDICATORIA
+    ========================== -->
+
+    <section id="dedicacion" class="pantalla">
+
+        <div class="dedicacion">
+
+            <img
+                src="img/foxy.png"
+                alt="Foxy"
+                class="foxy-dedicacion"
+            >
+
+            <div class="dedicacion-caja">
+
+                <h1>
+                    PARA TI
+                </h1>
+
+                <p>
+                    Mon amour...
+                </p>
+
+                <p>
+                    Quiero que siempre recuerdes que estoy
+                    orgulloso de ti y de todo el esfuerzo que
+                    haces cada día.
+                </p>
+
+                <p>
+                    Nunca te rindas.
+                </p>
+
+                <button onclick="mostrarCarta()">
+                    ÚLTIMA SORPRESA →
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CARTA FINAL
+    ========================== -->
+
+    <section id="carta" class="pantalla">
+
+        <div class="carta">
+
+            <div class="carta-decoracion">
+                ♥
+            </div>
+
+            <h1>
+                PARA MI MON AMOUR
+            </h1>
+
+            <div class="linea"></div>
+
+            <p>
+                Quiero que nunca olvides lo mucho que te amo.
+                Te amo con el alma, con todo lo que soy y con
+                todo lo que tengo para darte.
+            </p>
+
+            <p>
+                Me da muchísimo gusto saber que estás bien,
+                y de verdad deseo que sigas así siempre.
+                Quiero verte tranquila, feliz y cumpliendo
+                todo aquello que te propongas.
+            </p>
+
+            <p>
+                Estoy muy orgulloso de ti, de todo el esfuerzo
+                que haces día a día, incluso en esas veces en
+                las que las cosas pueden ponerse difíciles.
+            </p>
+
+            <p>
+                Sé que no siempre es fácil, pero quiero que
+                recuerdes que eres mucho más fuerte de lo que
+                crees.
+            </p>
+
+            <p>
+                Nunca te rindas, Mon amour.
+                Sigue adelante incluso cuando sientas que
+                ya no puedes.
+            </p>
+
+            <p>
+                Yo siempre voy a admirar la persona que eres
+                y todo lo que haces para seguir avanzando.
+            </p>
+
+            <p>
+                Quiero que sepas que te amo muchísimo y que,
+                mientras pueda, voy a estar aquí para
+                recordártelo.
+            </p>
+
+            <p class="frase-final">
+                No sé qué nos depare el futuro,
+                pero hay algo que sí sé:
+            </p>
+
+            <h2>
+                TE VOY A AMAR SIEMPRE.
+            </h2>
+
+            <div class="firma">
+
+                Con todo mi amor,
+
+                <strong>
+                    Mamorsosero ♥
+                </strong>
+
+                <span>
+                    Te amo con el alma, Mon amour.
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
